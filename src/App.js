@@ -1,23 +1,28 @@
-import logo from './logo.svg';
 import './App.css';
+import { Routes, Route } from "react-router-dom";
+import Nav from './Components/Nav/Nav';
+import Home from './Components/Home/Home';
+import Generator from './Components/Generator/Generator';
+import RequirAuth from './Components/RequirAuth/RequirAuth';
+import Login from './Components/Login/Login';
+import Register from './Components/Register/Register';
+import { Toaster } from 'react-hot-toast';
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Nav />
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/generator" element={
+          <RequirAuth>
+            <Generator />
+          </RequirAuth>
+        } />
+        <Route path="/login" element={<Login />} />
+        <Route path="/signup" element={<Register />} />
+      </Routes>
+      <Toaster />
     </div>
   );
 }
